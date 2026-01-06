@@ -1,0 +1,18 @@
+<h1>Join a team!</h1>
+<%= form_with url: join_teams_path, local: true do |form| %>
+  <div class="field">
+    <%= form.label :team_code, "Team Code" %>
+    <%= form.text_field :team_code, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Join Team" %>
+  </div>
+  <hr />
+  <p>
+    <em>
+      Don't have a team yet?
+      <%= link_to "Create a new team", new_team_path %>.
+    </em>
+  </p>
+<% end %>

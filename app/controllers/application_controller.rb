@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized
 
   helper_method :current_user, :user_signed_in?
+  helper_method :current_team, :user_in_team?
 
   before_action :authenticate_user!
 
@@ -14,6 +15,14 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  def current_team
+    @current_team ||= Team.find_by(id: session[:team_id]) if session[:team_id]
+  end
+
+  def user_in_team?
+    !!current_team
+  end
+
   def authenticate_user!
     unless user_signed_in?
       redirect_to root_path, alert: "login, silly"
@@ -21,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from Pundit::NotAuthorizedError do |e|
-    flash[:error] = "hey, you cn't do that!"
+    flash[:error] = "hey, you can't do that!"
     redirect_to root_path
   end
 

@@ -1,4 +1,19 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id          :integer          not null, primary key
+#  email       :string
+#  first_name  :string
+#  is_admin    :boolean
+#  last_name   :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  identity_id :string
+#  slack_id    :string
+#
 class User < ApplicationRecord
+
   def admin? = is_admin
 
   def name = "#{first_name} #{last_name}"
@@ -20,4 +35,6 @@ class User < ApplicationRecord
     user.save!
     user
   end
+
+  def profile_picture = "https://cachet.dunkirk.sh/users/#{slack_id}/r"
 end

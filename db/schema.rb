@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_06_111917) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_06_125624) do
+  create_table "teams", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.string "pairing_code"
+    t.string "team_id"
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_teams_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"

@@ -1,0 +1,17 @@
+<div class="h-full w-full flex flex-row items-center justify-center">
+  <div class="flex flex-col items-center justify-center">
+    <div>
+      <h1 class="display">Create your team</h1>
+      <%= form_with model: @team, local: true do |form| %>
+        <div class="field">
+          <%= form.label :name, "Team Name" %>
+          <%= form.text_field :name, required: true %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Create Team" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

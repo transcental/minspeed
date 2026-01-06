@@ -1,25 +1,24 @@
 <nav class="sidebar">
-  <div class="sidebar-header">
-    <h2>Dinobags</h2>
-  </div>
+  <img src="/midnight.svg" alt="Midnight Logo" class="sidebar-logo" />
 
-  <div class="sidebar-section">
-    <h3>Navigation</h3>
+  <div class="sidebar-section mb-4">
+    <h3 class="font-bold">Navigation</h3>
     <ul>
       <li><%= link_to "Dashboard", main_app.dashboard_path %></li>
+      <li><%= link_to "Manage Team", main_app.teams_path %></li>
     </ul>
   </div>
 
-  <div class="sidebar-section">
-    <h3>Account</h3>
+  <div class="sidebar-section mb-4">
+    <h3 class="font-bold">Account</h3>
     <ul>
       <li><%= link_to "Logout", main_app.logout_path, data: { turbo_method: :delete } %></li>
     </ul>
   </div>
 
   <% if current_user&.admin? %>
-    <div class="sidebar-section sidebar-admin">
-      <h3>Admin</h3>
+    <div class="sidebar-section mb-4 sidebar-admin">
+      <h3 class="font-bold">Admin</h3>
       <ul>
         <li><%= link_to "Dashboard", main_app.admin_root_path %></li>
         <li><%= link_to "Users", main_app.admin_users_path %></li>
@@ -30,3 +29,33 @@
     </div>
   <% end %>
 </nav>
+
+<style>
+    nav.sidebar {
+        width: calc(300px - 10px);
+        height: calc(100% - 10px);
+        position: fixed;
+        top: 5px;
+        left: 5px;
+        padding: 15px;
+        overflow: scroll;
+    }
+
+    .sidebar-logo {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .sidebar-section ul li {
+        background-color: #f76767;
+        border-radius: 12px;
+        padding: 2px 10px;
+        margin-bottom: 8px;
+        list-style: none;
+    }
+
+    .sidebar-section ul li * {
+        width: 100%;
+        display: block;
+    }
+</style>

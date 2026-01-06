@@ -10,5 +10,9 @@ Rails.application.routes.draw do
 
   # Dashboard
   get "dashboard", to: "dashboard#index", as: :dashboard
+  resources :teams do
+    get :join, on: :collection
+    post :join, on: :collection
+  end
   delete "logout", to: "sessions#destroy", as: :logout
 end

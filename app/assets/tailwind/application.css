@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+    --breakpoint-3xl: 1920px;
+}
+
+:root {
+    overscroll-behavior: none;
+    --sidebar-width: 300px;
+}
+
+html {
+    background-color: #F24B4B;
+    min-height: 100%;
+}
+
+button, input[type="submit"], input[type="button"] {
+    @apply bg-[#453B61] rounded-2xl px-3 py-1 text-white transition-colors hover:bg-[#4f456d] cursor-pointer
+}
+
+.display {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+body {
+    position: fixed;
+    width: calc(100% - 5px - var(--sidebar-width, 5px));
+    height: calc(100% - 10px);
+    left: var(--sidebar-width, 5px);
+    top: 5px;
+    background-color: #2D273F !important;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000000;
+    border-radius: 10px;
+    margin: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #fee1c0;
+    border-radius: 10px;
+    border: 2px solid #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f5d5a8;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #f24b4b;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #fee1c0 #000000;
+    color: white;
+}

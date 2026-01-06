@@ -1,6 +1,21 @@
 <% content_for :title, "Dashboard" %>
 
 <div class="dashboard-content">
-  <h1>Welcome, <%= current_user.name %>!</h1>
-  <p>This is your dashboard.</p>
+  <h1>Welcome, <%= current_user.first_name %>!</h1>
+  <hr />
+  <h2>Next up:
+    <% if @next_event %>
+      <span>
+        <%= @next_event[:title] %>
+        —
+        in <%= distance_of_time_in_words(Time.current, @next_event[:time]) %>
+        (at <%= @next_event[:time].strftime("%Y-%m-%d %H:%M") %>)
+      </span>
+    <% else %>
+      <span>No more deadlines! Thanks for participating :3</span>
+    <% end %>
+  </h2>
+  <% if user_in_team? %>
+  <h3><%= current_team.name %></h3>
+  <% end %>
 </div>
