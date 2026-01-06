@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_06_125624) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_06_194614) do
+  create_table "notes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "note"
+    t.string "team_id"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "team_users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "team_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["team_id"], name: "index_team_users_on_team_id"
+    t.index ["user_id"], name: "index_team_users_on_user_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -31,4 +47,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_06_125624) do
     t.string "slack_id"
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "team_users", "teams"
+  add_foreign_key "team_users", "users"
 end

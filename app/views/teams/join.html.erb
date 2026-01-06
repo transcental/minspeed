@@ -1,18 +1,26 @@
-<h1>Join a team!</h1>
-<%= form_with url: join_teams_path, local: true do |form| %>
-  <div class="field">
-    <%= form.label :team_code, "Team Code" %>
-    <%= form.text_field :team_code, required: true %>
-  </div>
+<div class="centered-div">
+  <div>
+    <h1 class="display">Join a team!</h1>
+    <%= form_with url: join_teams_path, local: true do |form| %>
+      <div class="field">
+        <%= form.label :team_code, "Team Code" %>
+        <%= form.text_field :team_code, required: true %>
+      </div>
 
-  <div class="actions">
-    <%= form.submit "Join Team" %>
+      <div class="actions mt-5">
+        <%= form.submit "Join Team" %>
+      </div>
+
+      <p class="opacity-50 py-4">— or —</p>
+
+      <p>
+        <em>
+          Don't have a team yet?
+          <span class="funny-link-parent">
+            <%= link_to "Create a new team", new_team_path %>
+          </span>
+        </em>
+      </p>
+    <% end %>
   </div>
-  <hr />
-  <p>
-    <em>
-      Don't have a team yet?
-      <%= link_to "Create a new team", new_team_path %>.
-    </em>
-  </p>
-<% end %>
+</div>

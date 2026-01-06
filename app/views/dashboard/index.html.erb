@@ -1,21 +1,43 @@
 <% content_for :title, "Dashboard" %>
 
 <div class="dashboard-content">
-  <h1>Welcome, <%= current_user.first_name %>!</h1>
-  <hr />
-  <h2>Next up:
-    <% if @next_event %>
+  <div class="nextup">
+    <h2>Next up:
+      <% if @next_event %>
       <span>
         <%= @next_event[:title] %>
         —
         in <%= distance_of_time_in_words(Time.current, @next_event[:time]) %>
         (at <%= @next_event[:time].strftime("%Y-%m-%d %H:%M") %>)
       </span>
-    <% else %>
-      <span>No more deadlines! Thanks for participating :3</span>
-    <% end %>
-  </h2>
+      <% else %>
+        <span>No more deadlines! Thanks for participating :3</span>
+      <% end %>
+    </h2>
+  </div>
+
+  <h1 class="display mt-4">Welcome, <%= current_user.first_name %>!</h1>
   <% if user_in_team? %>
-  <h3><%= current_team.name %></h3>
+    <h3><%= current_team.name %></h3>
+  <% else %>
+  <p>
+    You aren't in a team yet :c,
+    <span class="funny-link-parent">
+      <%= link_to "join", teams_path %>
+    </span>
+    or
+    <span class="funny-link-parent">
+      <%= link_to "create one!!", new_team_path %>
+    </span>
+  </p>
   <% end %>
 </div>
+
+<style>
+  .nextup {
+    background-color: #453B61;
+    border-radius: 12px;
+    padding: 4px 8px;
+    border-left: #FF6161 12px solid;
+  }
+</style>

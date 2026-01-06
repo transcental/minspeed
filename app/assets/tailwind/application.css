@@ -17,6 +17,9 @@ html {
 button, input[type="submit"], input[type="button"] {
     @apply bg-[#453B61] rounded-2xl px-3 py-1 text-white transition-colors hover:bg-[#4f456d] cursor-pointer
 }
+input[type="text"] {
+    @apply border-[#857e99] border rounded-2xl px-3 py-1 focus:bg-[#453B61] transition-all outline-0 focus:border-[#ffffff]
+}
 
 .display {
     font-size: 32px;
@@ -33,6 +36,7 @@ body {
     background-color: #2D273F !important;
     border-radius: 12px;
     padding: 15px;
+    overflow: scroll;
 }
 
 ::-webkit-scrollbar {

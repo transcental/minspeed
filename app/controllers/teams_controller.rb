@@ -1,14 +1,14 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
   skip_after_action :verify_authorized
-
+  helper_method :current_team, :user_in_team?
 
   def join
     if request.post?
       team = Team.find_by(pairing_code: params[:team_code])
 
       if team
-        session[:team_id] = team.id
+        TeamUser.find_or_create_by(user_id: current_user.id).update(team_id: team.id)
         redirect_to teams_path, notice: "Successfully joined team!"
       else
         redirect_to action: :join, alert: "Invalid team code"
@@ -17,14 +17,20 @@ class TeamsController < ApplicationController
   end
 
   def new
+    redirect_to teams_path, alert: "You're already in a team" if user_in_team?
     @team = Team.new
   end
 
   def create
+    if user_in_team?
+      redirect_to teams_path, alert: "You're already in a team" and return
+    end
+
     @team = Team.new(team_params)
+    @team.user_id = current_user.id
 
     if @team.save
-      session[:team_id] = @team.id
+      TeamUser.find_or_create_by(user_id: current_user.id).update(team_id: @team.id)
       redirect_to teams_path, notice: "Team created successfully!"
     else
       render :new, status: :unprocessable_entity
@@ -32,6 +38,11 @@ class TeamsController < ApplicationController
   end
 
   def index
+    @team = current_team
+    if request.post?
+      Notes.create(note: params[:note], team_id: team.id)
+      redirect_to teams_path, notice: "Note created!"
+    end
     unless user_in_team?
       redirect_to join_teams_path
     end

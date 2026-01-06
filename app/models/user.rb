@@ -13,7 +13,9 @@
 #  slack_id    :string
 #
 class User < ApplicationRecord
-
+  has_one :team_user, dependent: :destroy
+  # has_many :teams, through: :team_users
+  has_one :team, through: :team_user
   def admin? = is_admin
 
   def name = "#{first_name} #{last_name}"
@@ -21,6 +23,8 @@ class User < ApplicationRecord
   def make_admin! = update!(is_admin: true)
 
   def remove_admin! = update!(is_admin: false)
+
+  def has_team? = team.any?
 
   def self.from_hack_club_auth(auth_hash)
     hca_id = auth_hash.dig("uid")

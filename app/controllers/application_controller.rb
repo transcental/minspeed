@@ -16,9 +16,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_team
-    @current_team ||= Team.find_by(id: session[:team_id]) if session[:team_id]
+    current_user&.team
   end
-
   def user_in_team?
     !!current_team
   end

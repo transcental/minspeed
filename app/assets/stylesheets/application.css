@@ -8,3 +8,16 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+.centered-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 10px);
+    text-align: center;
+}
+
+.funny-link-parent a {
+    color: lightblue;
+    text-decoration: underline;
+}

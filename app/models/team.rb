@@ -15,7 +15,8 @@
 #  index_teams_on_user_id  (user_id)
 #
 class Team < ApplicationRecord
-  has_many :user
+  has_many :team_users, dependent: :destroy
+  has_many :users, through: :team_users
   validates :pairing_code, uniqueness: true, presence: true
 
   before_validation :generate_pairing_code, on: :create
