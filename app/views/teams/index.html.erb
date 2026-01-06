@@ -1,8 +1,11 @@
 <h1>You are in team:  <%= current_team.name %></h1>
 <h1>The join code is: <%= current_team.pairing_code %></h1>
 <h2>Here are your team notes:</h2>
-<%= form_with url: teams_path, local: true do |form| %>
-  <div class="field">
+<% @notes.each do |note| %>
+  <p><%= note.note %></p>
+<% end %>
+
+<%= form_with url: teams_notes_path , method: :post, local: true do |form| %>  <div class="field">
     <%= form.label :note, "Note: " %>
     <%= form.text_field :note, required: true %>
   </div>

@@ -15,4 +15,5 @@ Rails.application.routes.draw do
     post :join, on: :collection
   end
   delete "logout", to: "sessions#destroy", as: :logout
+  post "teams/notes", to: "teams#add_note", as: :teams_notes
 end

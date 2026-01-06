@@ -39,12 +39,16 @@ class TeamsController < ApplicationController
 
   def index
     @team = current_team
-    if request.post?
-      Notes.create(note: params[:note], team_id: team.id)
-      redirect_to teams_path, notice: "Note created!"
-    end
+    @notes = Note.where(team_id: @team.id)
     unless user_in_team?
       redirect_to join_teams_path
+    end
+  end
+
+  def add_note
+    if request.post?
+      Note.create(note: params[:note], team_id: current_team.id)
+      redirect_to teams_path, notice: "Note created!"
     end
   end
 
